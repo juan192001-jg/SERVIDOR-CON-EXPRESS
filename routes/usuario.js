@@ -3,10 +3,13 @@ import usuarioControllers from '../controllers/usuario.js';
 import { validarCampos } from '../middlewares/validar-campos.js';
 import { validarJsonToken } from '../middlewares/validar-jwt.js';
 import { validarRoles } from '../middlewares/validar-rol.js'
+import { check } from 'express-validator';
+
 
 const router = Router();
 router.get('/', [
     validarJsonToken,
+    check(),
     validarRoles('ADMIN_ROL'),
     validarCampos
 ], usuarioControllers.usuarioGet);
