@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const personasShema = mongoose.Schema({
     //  tipo de persona
     // Cliente, Proveedor 
-    tipoPersoan: { type: String, maxlength: 11 },
+    tipoPersona: { type: String, maxlength: 11, required: true },
     nombre: { type: String, maxlength: 50, unique: true },
     tipoDucumento: { type: String, maxlength: 20 },
     numeroDocumento: { type: Number, unique: true, maxlength: 20 },
@@ -12,4 +12,4 @@ const personasShema = mongoose.Schema({
     estado: { type: Number, default: 1 },
     createtAt: { type: Date, default: Date.now }
 })
-export default mongoose.model('Pesona', personasShema)
+export default mongoose.model('Persona', personasShema)

@@ -20,15 +20,15 @@ const articuloControllers = {
         })
     },
     articuloGetText: async(req, res) => {
-        const value = req.query.value
-        const articulo = await Articulo.findOne({
-                $and: [
-                    { categoria: new RegExp(value, 'i') },
-                    { nombre: new RegExp(value, 'i') }
+        const value = req.query.value;
+        const articulo = await Articulo
+            .find({
+                $or: [
+                    { nombre: new RegExp(value, 'i') },
+                    { descripcion: new RegExp(value, 'i') }
                 ]
-
             })
-            .sort({ 'categoria,nombre': 1 });
+            .sort({ 'descripcion': -1 });
         res.json({
             articulo
         })

@@ -4,12 +4,12 @@ import { validarCampos } from '../middlewares/validar-campos.js';
 import { validarJsonToken } from '../middlewares/validar-jwt.js';
 import { validarRoles } from '../middlewares/validar-rol.js'
 import { check } from 'express-validator';
+import { existeusuarioByid, existeemail } from '../helpers/usuario.js'
 
 
 const router = Router();
 router.get('/', [
     validarJsonToken,
-    check(),
     validarRoles('ADMIN_ROL'),
     validarCampos
 ], usuarioControllers.usuarioGet);
@@ -19,6 +19,11 @@ router.get('/:id', [
     validarCampos
 ], usuarioControllers.usuariosGetByid);
 router.post('/', [
+    check('nombre', 'El campo nombre es requerido y no puede estar vacio ').not().isEmpty(),
+    check('rol', 'El campo rol es requerido y no puede estar vacio ').not().isEmpty(),
+    check('email', 'El campo email es requerido y no puede estar vacio ').not().isEmpty(),
+    check('email').custom(existeemail),
+    check('password', 'El campo password es requerido y no puede estar vacio ').not().isEmpty(),
     validarJsonToken,
     validarRoles('ADMIN_ROL'),
     validarCampos

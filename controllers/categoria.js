@@ -65,10 +65,5 @@ const categoriacontrollers = {
             categoria
         })
     }
-
-
 }
-
-
-
 export default categoriacontrollers;

@@ -48,8 +48,8 @@ const personaControllers = {
         })
     },
     personaPost: async(req, res) => {
-        const { tipoPersoan, nombre, tipoDucumento, numeroDocumento, dirrecion, telefono, email } = req.body
-        const persona = Persona({ tipoPersoan, nombre, tipoDucumento, numeroDocumento, dirrecion, telefono, email })
+        const { tipoPersona, nombre, tipoDucumento, numeroDocumento, dirrecion, telefono, email } = req.body
+        const persona = Persona({ tipoPersona, nombre, tipoDucumento, numeroDocumento, dirrecion, telefono, email })
         await persona.save();
         res.json({
             persona

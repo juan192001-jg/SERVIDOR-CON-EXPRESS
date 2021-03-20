@@ -6,6 +6,7 @@ import usuario from '../routes/usuario.js';
 import articulo from '../routes/articulo.js';
 import Persona from '../routes/persona.js';
 import compra from '../routes/compras.js';
+import Ventas from '../routes/ventas.js';
 
 class server {
     constructor() {
@@ -24,7 +25,8 @@ class server {
         this.app.use('/api/usuario', usuario);
         this.app.use('/api/articulo', articulo);
         this.app.use('/api/persona', Persona);
-        this.app.use('/api/ingreso', compra)
+        this.app.use('/api/ingreso', compra);
+        this.app.use('/api/venta', Ventas)
 
     }
     async conectarDB() {

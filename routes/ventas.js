@@ -1,27 +1,29 @@
-import { Router } from 'express'
-import comprasControllers from '../controllers/compras.js'
+import Routes from 'express';
+import ventasControllers from '../controllers/ventas.js'
 import { validarCampos } from '../middlewares/validar-campos.js';
 import { check } from 'express-validator';
 import { validarJsonToken } from '../middlewares/validar-jwt.js';
 import { validarRoles } from '../middlewares/validar-rol.js';
 
-const router = Router();
+const router = Routes();
 router.get('/', [
     validarJsonToken,
-    validarRoles('ALMACENISTA_ROL'),
+    validarRoles('VENDEDOR_ROL'),
     validarCampos
-], comprasControllers.compraGet)
-router.get('/', [
-    validarJsonToken,
-    validarRoles('ALMACENISTA_ROL'),
-    validarCampos
-], comprasControllers.compraGetByIdText)
+], ventasControllers.ventasGet)
 router.get('/:id', [
     validarJsonToken,
-    validarRoles('ALMACENISTA_ROL'),
+    validarRoles('VENDEDOR_ROL'),
+    check('id', 'El ID ingresado no es  válido').isMongoId(),
     validarCampos
-], comprasControllers.comprasGetByid)
+], ventasControllers.ventasGetById)
+router.get('/', [
+    validarJsonToken,
+    validarRoles('VENDEDOR_ROL'),
+    validarCampos
+], ventasControllers.ventasGetText)
 router.post('/', [
+    validarJsonToken,
     check('usuario', 'El campo usuario no puede estar vacio por que es obligatorio').not().isEmpty(),
     check('persona', 'El capo persona usuario no puede estar vacio por que es obligatorio').not().isEmpty(),
     check('tipoComprobante', 'El compo tipo de comprovante no puede estar vacio por que es obligatorio').not().isEmpty(),
@@ -29,20 +31,21 @@ router.post('/', [
     check('numeroComprobante', 'EL campo numero de comprobante no puede estar vacio por que es obligatorio').not().isEmpty(),
     check('total', 'EL campo total no puede estar vacio por que es obligatorio').not().isEmpty(),
     check('detalles', 'EL campo  detalles no puede estar vacio por que es obligatorio').not().isEmpty(),
-    validarJsonToken,
-    validarRoles('ALMACENISTA_ROL'),
+    validarRoles('VENDEDOR_ROL'),
     validarCampos
-], comprasControllers.compraPost)
+], ventasControllers.ventasPost)
 router.put('/activar/:id', [
     validarJsonToken,
-    validarRoles('ALMACENISTA_ROL'),
+    validarRoles('VENDEDOR_ROL'),
+    check('id', 'El ID ingresado no es  válido').isMongoId(),
     validarCampos
-], comprasControllers.compraPutActivar)
+], ventasControllers.ventasPutactivar)
 router.put('/desactivar/:id', [
     validarJsonToken,
-    validarRoles('ALMACENISTA_ROL'),
+    check('id', 'El ID ingresado no es  válido').isMongoId(),
+    validarRoles('VENDEDOR_ROL'),
     validarCampos
-], comprasControllers.compraPutDesactivar)
+], ventasControllers.ventasPutDesactivar)
 
 
 export default router

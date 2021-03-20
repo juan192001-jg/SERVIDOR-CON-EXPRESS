@@ -6,5 +6,11 @@ const existeusuarioByid = async(id) => {
         throw new Error('El ID no existe ')
     }
 }
+const existeemail = async(email) => {
+    const existe = await Usuario.findOne({ email })
+    if (existe) {
+        throw new Error(`ya esiste existe el email ${email}`)
+    }
+}
 
-export { existeusuarioByid }
+export { existeusuarioByid, existeemail }
