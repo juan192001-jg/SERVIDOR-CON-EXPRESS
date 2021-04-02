@@ -6,7 +6,7 @@ const articulosShema = mongoose.Schema({
     nombre: { type: String, required: true, maxlength: 50 },
     descripcion: { type: String, maxlength: 255, required: true },
     precioventa: { type: Number, default: 0 },
-    stok: { type: Number, default: 0 },
+    stock: { type: Number, default: 0 },
     estado: { type: Number, default: 1 },
     createtAd: { type: Date, default: Date.now }
 

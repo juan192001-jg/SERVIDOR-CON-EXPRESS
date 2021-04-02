@@ -29,8 +29,8 @@ router.post('/', [
     validarCampos
 ], usuarioControllers.usuarioPost);
 router.post('/login', [
-    validarJsonToken,
-    validarRoles('ADMIN_ROL'),
+    check('email', 'el campo email no puede estar vacio ').not().isEmpty(),
+    check('password', 'el campo password no puede estar vacio ').not().isEmpty(),
     validarCampos
 ], usuarioControllers.loginPost);
 router.put('/:id', [

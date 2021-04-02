@@ -1,6 +1,12 @@
 import Compras from '../models/compras.js';
+import Artiulos from '../models/articulo.js';
 
 const comprasControllers = {
+    aumentarStock: async(_id, cantidad) => {
+        let { stock } = await Artiulos.findById(_id)
+        stock = parseInt(stock) + parseInt(cantidad)
+        const reg = await Artiulos.findByIdAndUpdate({ _id }, { stock })
+    },
 
     compraGet: async(req, res) => {
         const compras = await Compras
@@ -20,11 +26,14 @@ const comprasControllers = {
             tipoComprobante,
             serieComprobante,
             numeroComprobante,
-            impuesto,
             total,
             detalles
         })
         await compra.save();
+        // [{ _id, articulo, cantidad, precio, descuento }]
+        impuesto,
+        detalles.map((artiulos) => comprasControllers.aumentarStock(artiulos._id, artiulos.cantidad));
+
         res.json({
             compra
         })

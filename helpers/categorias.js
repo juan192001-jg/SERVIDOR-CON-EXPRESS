@@ -2,7 +2,7 @@ import Categoria from "../models/categoria.js"
 
 const existenCategoriasById = async(id) => {
     const existe = await Categoria.findById(id);
-    if (!existe) throw new Error(`El ID no existe ${id}`);
+    if (!existe) throw new Error(`El ID no existe`);
 
 }
 const existenCategoriasByNombre = async(nombre) => {

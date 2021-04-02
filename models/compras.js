@@ -5,7 +5,7 @@ const comprasShema = mongoose.Schema({
     tipoComprobante: { type: String, maxlength: 20, required: true },
     serieComprobante: { type: Number, required: true, maxlength: 7 },
     numeroComprobante: { type: Number, required: true, maxlength: 10 },
-    impuesto: { type: Number, maxlength: 6, required: true },
+    impuesto: { type: Number, maxlength: 6, required: false },
     total: { required: true, type: Number },
     detalles: [{
         _id: { type: String, required: true },
