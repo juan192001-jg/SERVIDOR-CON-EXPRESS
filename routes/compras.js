@@ -2,6 +2,7 @@ import { Router } from 'express'
 import comprasControllers from '../controllers/compras.js'
 import { validarCampos } from '../middlewares/validar-campos.js';
 import { check } from 'express-validator';
+
 import { validarJsonToken } from '../middlewares/validar-jwt.js';
 import { validarRoles } from '../middlewares/validar-rol.js';
 
@@ -17,6 +18,7 @@ router.get('/', [
     validarCampos
 ], comprasControllers.compraGetByIdText)
 router.get('/:id', [
+    check('id', 'El ID no existe').isMongoId(),
     validarJsonToken,
     validarRoles('ALMACENISTA_ROL'),
     validarCampos
@@ -34,11 +36,13 @@ router.post('/', [
     validarCampos
 ], comprasControllers.compraPost)
 router.put('/activar/:id', [
+    check('id', 'El ID no existe').isMongoId(),
     validarJsonToken,
     validarRoles('ALMACENISTA_ROL'),
     validarCampos
 ], comprasControllers.compraPutActivar)
 router.put('/desactivar/:id', [
+    check('id', 'El ID no existe').isMongoId(),
     validarJsonToken,
     validarRoles('ALMACENISTA_ROL'),
     validarCampos

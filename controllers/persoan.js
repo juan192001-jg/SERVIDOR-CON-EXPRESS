@@ -47,6 +47,13 @@ const personaControllers = {
             personaid
         })
     },
+    personaGetNumeroDocuemnto: async(req, res) => {
+        const { id } = req.params;
+        const documento = await Persona.findOne({ numeroDocumento: id })
+        res.json({
+            documento
+        })
+    },
     personaPost: async(req, res) => {
         const { tipoPersona, nombre, tipoDucumento, numeroDocumento, dirrecion, telefono, email } = req.body
         const persona = Persona({ tipoPersona, nombre, tipoDucumento, numeroDocumento, dirrecion, telefono, email })

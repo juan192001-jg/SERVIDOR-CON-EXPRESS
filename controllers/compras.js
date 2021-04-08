@@ -1,10 +1,18 @@
 import Compras from '../models/compras.js';
 import Artiulos from '../models/articulo.js';
 
+
 const comprasControllers = {
+
+
     aumentarStock: async(_id, cantidad) => {
         let { stock } = await Artiulos.findById(_id)
         stock = parseInt(stock) + parseInt(cantidad)
+        await Artiulos.findByIdAndUpdate({ _id }, { stock })
+    },
+    disminuirStock: async(_id, cantidad) => {
+        let { stock } = await Artiulos.findById(_id)
+        stock = parseInt(stock) - parseInt(cantidad)
         const reg = await Artiulos.findByIdAndUpdate({ _id }, { stock })
     },
 
@@ -30,9 +38,8 @@ const comprasControllers = {
             detalles
         })
         await compra.save();
-        // [{ _id, articulo, cantidad, precio, descuento }]
-        impuesto,
-        detalles.map((artiulos) => comprasControllers.aumentarStock(artiulos._id, artiulos.cantidad));
+
+        detalles.map((articulos) => comprasControllers.aumentarStock(articulos._id, articulos.cantidad));
 
         res.json({
             compra
@@ -66,11 +73,13 @@ const comprasControllers = {
         const { id } = req.params;
         const activado = await Compras.findByIdAndUpdate(id, { estado: 1 })
         res.json({ activado })
+        comprasControllers.disminuirStock
     },
     compraPutDesactivar: async(req, res) => {
         const { id } = req.params;
         const desactivado = await Compras.findByIdAndUpdate(id, { estado: 0 })
         res.json({ desactivado });
+        comprasControllers.aumentarStock
     }
 }
 export default comprasControllers;

@@ -12,13 +12,13 @@ const validarArticulos = {
         if (existe) { throw new Error(`El id de la categoria no existe ${id}`) }
 
     },
-    EstadoInactivo: (estado) => {
-        const validar = estado
-        if (validar === 0) { throw new Error('el campo ya esta inactivo') }
+    EstadoInactivo: async(estado) => {
+        const exite = await estado
+        if (existe == 0) { throw new Error('el campo ya esta inactivo') }
     },
     EstadoeActivo: async(estado) => {
-        const existe = await Articulo.find
-        if ((existe === 1)) { throw new Error('el campo ya esta activo') }
+        const existe = await Articulo.estado(estado)
+        if (existe === 1) { throw new Error('El estado de articulo ya esta activo') }
     }
 }
 
