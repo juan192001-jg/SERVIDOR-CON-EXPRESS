@@ -11,17 +11,17 @@ import existeDatos from '../helpers/persona.js';
 
 const router = new Router();
 router.get('/', [
-    validarJsonToken,
-    validarRoles('ALMACENISTA_ROL'),
-    validarCampos
-], personaControllers.personaGet)
-router.get('/:id', [
-    validarJsonToken,
-    check('id', 'El ID no existe').isMongoId(),
-    check('id').custom(existeDatos.existeid),
-    validarRoles('ALMACENISTA_ROL'),
-    validarCampos
-], personaControllers.personaGetByid)
+        validarJsonToken,
+        validarRoles('ALMACENISTA_ROL'),
+        validarCampos
+    ], personaControllers.personaGet)
+    // router.get('/:id', [
+    //     validarJsonToken,
+    //     check('id', 'El ID no existe').isMongoId(),
+    //     check('id').custom(existeDatos.existeid),
+    //     validarRoles('ALMACENISTA_ROL'),
+    //     validarCampos
+    // ], personaControllers.personaGetByid)
 router.get('/numeroDucumento/:id', [
     validarJsonToken,
     check('id').custom(existeDatos.existeNumeroDocuemento),
@@ -29,12 +29,12 @@ router.get('/numeroDucumento/:id', [
     validarCampos
 
 ], personaControllers.personaGetNumeroDocuemnto)
-router.get('/listCliente', [
+router.get('/listCliente/', [
     validarJsonToken,
     validarRoles('VENDEDOR_ROL'),
     validarCampos
 ], personaControllers.clienteGet)
-router.get('/listPeoveedore', [
+router.get('/listPeoveedore/', [
     validarJsonToken,
     validarRoles('ALMACENISTA_ROL'),
     validarCampos

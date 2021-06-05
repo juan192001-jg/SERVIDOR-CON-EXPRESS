@@ -16,27 +16,29 @@ const personaControllers = {
     },
     clienteGet: async(req, res) => {
         const value = req.query.value
-        const listaClente = await Persona.find({
-                $and: [
-                    { tipoPersoan: new RegExp(value, 'i') }
+        const persona = await Persona.find({
+                $or: [
+                    { tipoPersona: new RegExp(value, 'i') }
                 ]
             })
-            .sort({ 'tipoPersoan': -1 });
+            .sort({ 'tipoPersona': -1 });
         res.json({
-            listaClente
+            persona
         })
+
     },
     proveedorGet: async(req, res) => {
         const value = req.query.value
-        const listaProveedor = await Persona.find({
-                $and: [
-                    { tipoPersoan: new RegExp(value, 'i') }
+        const persona = await Persona.find({
+                $or: [
+                    { tipoPersona: new RegExp(value, 'i') }
                 ]
             })
-            .sort({ 'tipoPersoan': -1 });
+            .sort({ 'tipoPersona': -1 });
         res.json({
-            listaProveedor
+            persona
         })
+
     },
     personaGetByid: async(req, res) => {
         const { id } = req.params;

@@ -6,6 +6,7 @@ const existeDatos = {
         if (existe) { throw new Error('El numero de documeto ya existe') }
     },
     existeid: async(_id) => {
+
         const existe = await Persona.findById({ _id })
         if (!existe) { throw new Error('El id no existe') }
     },
