@@ -45,7 +45,7 @@ router.put('/activar/:id', [
     validarJsonToken,
     validarRoles('ALMACENISTA_ROL'),
     check('id', 'el id no  esxiste ').isMongoId(),
-    check('estado').custom(validarArticulos.EstadoeActivo),
+    // check('estado').custom(validarArticulos.EstadoeActivo),
     validarCampos
 ], ArticuloControllers.articuloPutactivar)
 router.put('/desactivar/:id', [
