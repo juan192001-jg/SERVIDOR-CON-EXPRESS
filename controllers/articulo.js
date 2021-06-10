@@ -35,8 +35,8 @@ const articuloControllers = {
 
     },
     articuloPost: async(req, res) => {
-        const { categoria, codigo, nombre, descripcion, precioventa, stok } = req.body
-        const articulo = new Articulo({ categoria, codigo, nombre, descripcion, precioventa, stok })
+        const { categoria, codigo, nombre, descripcion, precioventa, stock } = req.body
+        const articulo = new Articulo({ categoria, codigo, nombre, descripcion, precioventa, stock })
         await articulo.save();
         res.json({
             articulo
